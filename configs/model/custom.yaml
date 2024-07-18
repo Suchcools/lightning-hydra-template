@@ -1,0 +1,22 @@
+_target_: src.models.custom_module.CustomLitModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
+  weight_decay: 0.0
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+net:
+  _target_: src.models.components.resnet.ResNet
+  num_classes: 4
+  blocks: [3, 4, 6, 3]
+
+# compile model for faster training with pytorch 2.0
+compile: false
